@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - OmniEye</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <h1>OmniEye Dashboard</h1>
+
+    <div class="container">
+
+        <h2>Detection Result</h2>
+
+        <div id="resultBox">
+            Loading...
+        </div>
+
+        <br>
+
+        <button onclick="goBack()">Upload Another Image</button>
+
+    </div>
+
+    <script>
+        // LocalStorage se data uthao
+        const data = JSON.parse(localStorage.getItem("result"));
+
+        const resultBox = document.getElementById("resultBox");
+
+        if (data) {
+            // Agar match mila
+            if (data.match === true) {
+                resultBox.innerHTML = `
+                    <h3 style="color: green;">✅ Match Found</h3>
+                    <p><b>Name:</b> ${data.name || "Unknown"}</p>
+                    <p><b>Location:</b> ${data.location || "Unknown"}</p>
+                `;
+            } else {
+                resultBox.innerHTML = `
+                    <h3 style="color: red;">❌ No Match Found</h3>
+                `;
+            }
+        } else {
+            resultBox.innerHTML = "<p>No data found</p>";
+        }
+
+        function goBack() {
+            window.location.href = "upload.html";
+        }
+        
+    </script>
+    <script src="../js/dashboard.js"></script>
+   
+
+</body>
+</html>
